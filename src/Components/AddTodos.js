@@ -39,14 +39,16 @@ const AddTodos = (props) => {
 
     return (
         <form className='myFormStyle' onSubmit={handleSubmit}>
-            <h1 className='heading'>Todo-Grid</h1>
-            <div>
-                <label className='title' htmlFor='Title'>Title : </label><br />
-                <input type={'text'} className="myInputStyle" value={title} onChange={(event) => settitle(event.target.value)}></input> <br />
-            </div>
-            <div>
-                <label className='title' htmlFor='Desc'>Description : </label> <br />
-                <input type={'text'} className="myInputStyle" value={desc} onChange={(event) => setdesc(event.target.value)}></input> <br />
+            <h3 className='heading'>Todo-Grid</h3>
+            <div className='inputDiv'>
+                <div>
+                    <label className='title' htmlFor='Title'>Title : </label><br />
+                    <input type={'text'} className="myInputStyle" value={title} onChange={(event) => settitle(event.target.value)}></input> <br />
+                </div>
+                <div>
+                    <label className='title' htmlFor='Desc'>Description : </label> <br />
+                    <input type={'text'} className="myInputStyle" value={desc} onChange={(event) => setdesc(event.target.value)}></input> <br />
+                </div>
             </div>
             <button className='myAddBtnStyle' onClick={handleSubmit} type={'submit'}>Add Item</button>
             <button className='mybtnStyle' onClick={(e) => handleSort(e, 'byTitle')}>Sort by Title</button>

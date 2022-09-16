@@ -2,9 +2,8 @@
     text-align: center;
     margin: 10px;
     padding: 15px 40px;
-    background-color: rgb(231, 231, 209);
-    /* background-color: rgb(112, 225, 225); */
-    /* background-color: #ebe7dd; */
+    background-color: rgba(243, 243, 168, 0.945);
+    /* background-color: rgb(231, 231, 209); */
     border-radius: 10px;
     min-width: 300px;
     max-width: 450px;
@@ -19,13 +18,13 @@
     font-size: 40px;
 }
 
-.btnStyle {
-    border-radius: 20px;
-    margin: 0px 5px;
-    padding: 5px;
-    font-size: 14px;
 
-    background-color: rgb(122, 204, 236);
+.btnStyle {
+    border-radius: 10px;
+}
+
+.redBtnStyle {
+    border-radius: 10px;
 }
 
 .mainDivStyle {
@@ -35,15 +34,26 @@
     flex-wrap: wrap;
 }
 
-.redBtnStyle {
-    border-radius: 20px;
-    margin: 0px 5px;
-    padding: 5px;
-    font-size: 12px;
-    background-color: orange;
+.todoBottom {
+    margin-bottom: 0px;
 }
+
 
 .mainDivStyle img {
     height: 20px;
     width: 20px;
+}
+
+.todoTitle {
+    text-align: left;
+    border-bottom: 1px solid grey;
+}
+
+.todoDesc {
+    padding: 20px;
+}
+
+.todoTime {
+    color: grey;
+    margin: 0px 30px;
 }

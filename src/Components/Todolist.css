@@ -6,9 +6,7 @@
     justify-content: center;
     align-items: top;
     min-height: 100vh;
-    background-image: url(/src/Components/assets/notes2.jpg);
+    background-image: url(/src/Components/assets/notes.jpg);
     background-size: cover;
-    /* background-color: rgb(213, 235, 235); */
-    /* background-color: rgb(115, 54, 169); */
     font-family: 'Kanit', sans-serif;
 }
