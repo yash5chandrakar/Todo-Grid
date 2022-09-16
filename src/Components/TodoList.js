@@ -8,20 +8,28 @@ const TodoList = () => {
     const localStorageKey = "todos"
     let retrievedObj;
 
-    if (localStorage.getItem(localStorageKey) !== []) {
+    try {
         retrievedObj = JSON.parse(localStorage.getItem(localStorageKey))
     }
-    else {
+    catch (err) {
         retrievedObj = []
     }
 
-    // console.log(retrievedObj)
-
     const [todos, setTodos] = useState(retrievedObj)
+
+
+    useEffect(() => {
+        if (todos === undefined || todos === null) {
+            setTodos([])
+        }
+        localStorage.setItem(localStorageKey, JSON.stringify(todos))
+    }, [todos])
 
     const addTodo = (todo) => {
         // setTodos([...todos, todo])
-        setTodos((oldstate, oldprops) => [...oldstate, todo])
+        setTodos((oldstate, oldprops) => {
+            return [...oldstate, todo]
+        })
     }
 
     const deleteTodo = (itemid) => {
@@ -74,11 +82,6 @@ const TodoList = () => {
             setTodos([...myTodos])
         }
     }
-
-    useEffect(() => {
-        // console.log(todos)
-        localStorage.setItem(localStorageKey, JSON.stringify(todos))
-    }, [todos])
 
     return (
         <div className="mainDiv">

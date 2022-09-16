@@ -6,14 +6,12 @@ const AddTodos = (props) => {
     const [desc, setdesc] = useState("")
 
 
-    // add a function format data (add a util file)
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
         let newTitle = title.trim()
         let newDesc = desc.trim()
-
-        // add a function for validation here
 
         if (newTitle !== "" && newDesc !== "") {
             const todo = {

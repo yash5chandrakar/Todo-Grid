@@ -3,10 +3,13 @@ import './Todos.css'
 
 const Todos = (props) => {
     let todos = props.todos
+    console.log(todos)
+
+
 
     return (
         <div className='mainDivStyle'>
-            {((todos == null || todos.length === 0) ? <div className='noItemStyle'>No items in grid</div> : (
+            {((todos === null || todos.length === 0) ? <div className='noItemStyle'>No items in grid</div> : (
                 todos.map((item) => {
                     // console.log(item.time)
                     return (
