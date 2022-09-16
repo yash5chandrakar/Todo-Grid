@@ -22,7 +22,6 @@ This Project has follwing features :-
 The following tech stacks are used to build this project :-
         <ol>
             <li>React JS</li>
-            <li>Local Storage Feature</li>
             <li>CSS</li>
         </ol>
 
