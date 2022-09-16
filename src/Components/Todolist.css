@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: top;
+    /* min-width: 30%; */
     min-height: 100vh;
     background-image: url(/src/Components/assets/notes.jpg);
     background-size: cover;
