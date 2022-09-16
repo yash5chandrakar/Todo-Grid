@@ -14,10 +14,10 @@
     text-align: center;
     margin: 10px;
     padding: 10px;
-    color: black;
+    color: rgba(243, 243, 168, 0.945);
+    /* color: black; */
     font-size: 40px;
 }
-
 
 .btnStyle {
     border-radius: 10px;
