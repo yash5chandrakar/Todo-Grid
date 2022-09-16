@@ -1,5 +1,5 @@
 # Todo-Grid 
-This is a simple Todo-App which you use to take and store your Notes with Local Storage feature.
+This is a simple Todo-App which you can use to take and store your Notes. It comes with Local Storage feature.
 
 # Link
 Link to the Project is Here.
