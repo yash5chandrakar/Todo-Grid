@@ -1,0 +1,49 @@
+.myDivStyle {
+    text-align: center;
+    margin: 10px;
+    padding: 15px 40px;
+    background-color: rgb(231, 231, 209);
+    /* background-color: rgb(112, 225, 225); */
+    /* background-color: #ebe7dd; */
+    border-radius: 10px;
+    min-width: 300px;
+    max-width: 450px;
+    overflow: auto;
+}
+
+.noItemStyle {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    color: black;
+    font-size: 40px;
+}
+
+.btnStyle {
+    border-radius: 20px;
+    margin: 0px 5px;
+    padding: 5px;
+    font-size: 14px;
+
+    background-color: rgb(122, 204, 236);
+}
+
+.mainDivStyle {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.redBtnStyle {
+    border-radius: 20px;
+    margin: 0px 5px;
+    padding: 5px;
+    font-size: 12px;
+    background-color: orange;
+}
+
+.mainDivStyle img {
+    height: 20px;
+    width: 20px;
+}

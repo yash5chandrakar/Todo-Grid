@@ -1,0 +1,41 @@
+.myFormStyle {
+    text-align: center;
+    /* color: white; */
+}
+
+.title {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+.heading {
+    font-size: 50px;
+    color: black;
+    text-decoration: underline wavy;
+    /* color: rgb(160, 11, 193); */
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.myAddBtnStyle {
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 15px;
+    margin: 10px;
+    background-color: greenyellow;
+}
+
+.myInputStyle {
+    border-radius: 25px;
+    padding: 0px 12px;
+}
+
+.mybtnStyle {
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 15px;
+    margin: 10px;
+    background-color: violet;
+}
