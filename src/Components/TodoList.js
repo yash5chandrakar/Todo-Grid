@@ -53,7 +53,7 @@ const TodoList = () => {
     }
 
     const getFilteredItems = () => {
-        if (filter == "All") {
+        if (filter === "All") {
             return todos
         }
         let filterValue = filter === "completed" ? true : false
