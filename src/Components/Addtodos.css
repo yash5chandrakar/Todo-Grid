@@ -30,11 +30,11 @@
 }
 
 .myInputStyle {
-    border-radius: 25px;
-    padding-left: 3%;
-    /* width: 90%; */
-    font-size: 100%;
+    border-radius: 20px;
+    font-size: 15px;
+    margin: 15px;
     font-weight: 600;
+    width: 150px;
 }
 
 .mybtnStyle {

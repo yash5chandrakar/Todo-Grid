@@ -2,7 +2,7 @@
 This is a simple Todo-App which you can use to take and store your Notes. It comes with Local Storage feature.
 
 # Link
-Link to the Project is Here.
+Link to the Project is <a href="https://sparkling-fenglisu-0431f1.netlify.app/">Here</a>.
 
 # Requirements
 No Special Requirements needed.

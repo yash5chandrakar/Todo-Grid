@@ -2,21 +2,24 @@ import React, { useState, useEffect } from 'react'
 import AddTodos from './AddTodos'
 import Todos from './Todos'
 import './Todolist.css'
+import { ToastContainer } from 'react-toastify'
 
 const TodoList = () => {
-
     const localStorageKey = "todos"
-    let retrievedObj;
+    const getLocalTodos = () => {
+        let retrievedObj;
 
-    try {
-        retrievedObj = JSON.parse(localStorage.getItem(localStorageKey))
+        try {
+            retrievedObj = JSON.parse(localStorage.getItem(localStorageKey))
+        }
+        catch (err) {
+            retrievedObj = []
+        }
+        return retrievedObj
     }
-    catch (err) {
-        retrievedObj = []
-    }
 
-    const [todos, setTodos] = useState(retrievedObj)
-
+    const [todos, setTodos] = useState(getLocalTodos())
+    const [filter, setFilter] = useState("All")
 
     useEffect(() => {
         if (todos === undefined || todos === null) {
@@ -26,7 +29,6 @@ const TodoList = () => {
     }, [todos])
 
     const addTodo = (todo) => {
-        // setTodos([...todos, todo])
         setTodos((oldstate, oldprops) => {
             return [...oldstate, todo]
         })
@@ -38,56 +40,32 @@ const TodoList = () => {
         }))
     }
 
-    const sortTodos = (method) => {
-        if (method === "byTitle") {
-            let myTodos = todos
-            myTodos.sort((a, b) => a.title.localeCompare(b.title))
-            setTodos([...myTodos])
-        }
-        else {
-            let myTodos = todos
-            myTodos.sort((a, b) => b.sno - a.sno)
-            setTodos([...myTodos])
-        }
+    const markItem = (val, index) => {
+        setTodos(todos?.map((item, ind) => {
+            if (ind === index) {
+                return {
+                    ...item,
+                    completed: val
+                }
+            }
+            return item
+        }))
     }
 
-    function editItem(itemId) {
-        let data = prompt("Enter data as follows : - (Title : Description) ")
-        if (data == null) {
-            alert("No Changes have been made.")
-            return
+    const getFilteredItems = () => {
+        if (filter == "All") {
+            return todos
         }
-        let arr = data.split(":")
-        if (arr.length <= 1) {
-            alert("Incorrect Format. Please Try Again")
-        }
-        else {
-            const title = arr[0].trim()
-            const desc = arr[1].trim()
-            // console.log(title, desc)
-            const todo = {
-                sno: Date.now(),
-                title: title,
-                desc: desc,
-                time: new Date().toLocaleDateString()
-            }
-            let myTodos = JSON.parse(JSON.stringify(todos))
-
-            const index = myTodos.findIndex((element) => {
-                return element.sno === itemId
-            })
-
-            myTodos.splice(index, 1, todo)
-
-            setTodos([...myTodos])
-        }
+        let filterValue = filter === "completed" ? true : false
+        return todos?.filter((el) => el?.completed === filterValue)
     }
 
     return (
         <div className="mainDiv">
+            <ToastContainer />
             <div>
-                <AddTodos addTodo={addTodo} todos={todos} sortTodos={sortTodos} />
-                <Todos todos={todos} editItem={editItem} deleteTodo={deleteTodo} />
+                <AddTodos addTodo={addTodo} todos={todos} setFilter={setFilter} filter={filter} />
+                <Todos todos={getFilteredItems()} deleteTodo={deleteTodo} markItem={markItem} />
             </div>
         </div>
     )

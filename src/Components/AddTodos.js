@@ -1,56 +1,142 @@
 import React, { useState } from 'react'
 import './Addtodos.css'
+import {
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Col,
+    Row,
+    Input
+} from 'reactstrap';
+import { toast } from 'react-toastify';
 
 const AddTodos = (props) => {
-    const [title, settitle] = useState("")
-    const [desc, setdesc] = useState("")
+    const [todoItem, setTodoItem] = useState(props?.todoItem || {})
+    const [modal, setModal] = useState(false);
+    const [errors, setErrors] = useState({});
 
+    const toggle = () => {
+        setModal(!modal)
+    };
 
+    const validateTodo = () => {
+        let isValid = true;
+        let error = {}
 
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        let newTitle = title.trim()
-        let newDesc = desc.trim()
-
-        if (newTitle !== "" && newDesc !== "") {
-            const todo = {
-                sno: Date.now(),
-                title: newTitle,
-                desc: newDesc,
-                time: new Date().toLocaleDateString()
+        if (!todoItem?.title?.trim()) {
+            isValid = false;
+            error = {
+                ...error,
+                "title": "Title is required!"
             }
-            props.addTodo(todo)
-            settitle("")
-            setdesc("")
         }
-        else {
-            alert("Title and Desc cannot be left empty")
+
+        if (!todoItem?.description?.trim()) {
+            isValid = false;
+            error = {
+                ...error,
+                "description": "Description is required!"
+            }
         }
+
+        return { isValid, error }
     }
 
+    const handleSubmit = () => {
+        let { isValid, error } = validateTodo()
 
-    function handleSort(event, method) {
-        event.preventDefault()
-        props.sortTodos(method)
+        if (!isValid) {
+            setErrors(error);
+            toast.error("Please Enter Valid Details")
+            return
+        }
+
+        props.addTodo({
+            title: todoItem?.title,
+            description: todoItem?.description,
+        })
+        setTodoItem({})
+        toggle()
+    }
+
+    const handleItemModal = () => {
+        setModal(true)
+        setTodoItem({
+            type: 'new',
+            title: "",
+            description: "",
+        })
+        setErrors({})
+    }
+
+    const handleChange = (val, name) => {
+        setTodoItem({
+            ...todoItem,
+            [name]: val
+        })
+        setErrors({
+            ...errors,
+            [name]: ""
+        })
     }
 
     return (
-        <form className='myFormStyle' onSubmit={handleSubmit}>
+        <form className='myFormStyle' onSubmit={(e) => e.preventDefault()}>
             <h3 className='heading'>Todo-Grid</h3>
-            <div className='inputDiv'>
-                <div>
-                    <label className='title' htmlFor='Title'>Title : </label><br />
-                    <input type={'text'} className="myInputStyle" value={title} onChange={(event) => settitle(event.target.value)}></input> <br />
-                </div>
-                <div>
-                    <label className='title' htmlFor='Desc'>Description : </label> <br />
-                    <input type={'text'} className="myInputStyle" value={desc} onChange={(event) => setdesc(event.target.value)}></input> <br />
-                </div>
+            <div className='d-flex justify-content-center'>
+                <button className='myAddBtnStyle' onClick={() => handleItemModal()} >Add New Item</button>
+                <Input
+                    name="select"
+                    type="select"
+                    className='myInputStyle'
+                    value={props?.filter}
+                    onChange={(e) => props?.setFilter(e.target.value)}
+                >
+                    <option value="All">All</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending</option>
+                </Input>
             </div>
-            <button className='myAddBtnStyle' onClick={handleSubmit} type={'submit'}>Add Item</button>
-            <button className='mybtnStyle' onClick={(e) => handleSort(e, 'byTitle')}>Sort by Title</button>
-            <button className='mybtnStyle' onClick={(e) => handleSort(e, 'byTime')}>Sort by Time</button>
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>{todoItem?.type === "new" ? "Add" : "Edit"} Item</ModalHeader>
+                <ModalBody>
+                    <Row>
+                        <Col md={12} className='mb-2'>
+                            <Input
+                                type='text'
+                                onChange={(e) => handleChange(e.target.value, "title")}
+                                value={todoItem?.title || ""}
+                                placeholder='Enter Title'
+                            />
+                            {errors?.title && (
+                                <p className='text-danger'>{errors?.title}</p>
+                            )}
+                        </Col>
+                        <Col>
+                            <Input
+                                type='textarea'
+                                onChange={(e) => handleChange(e.target.value, "description")}
+                                value={todoItem?.description || ""}
+                                placeholder='Enter Description'
+                            />
+                            {errors?.description && (
+                                <p className='text-danger'>{errors?.description}</p>
+                            )}
+                        </Col>
+                    </Row>
+                </ModalBody>
+                <ModalFooter className='d-flex justify-content-center'>
+                    <div>
+                        <Button color="primary" onClick={() => {
+                            handleSubmit()
+                        }}>
+                            {todoItem?.type === "new" ? "Add" : "Update"} Item
+                        </Button>
+                    </div>
+                </ModalFooter>
+            </Modal>
         </form>
     )
 }
